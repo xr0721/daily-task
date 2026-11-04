@@ -1,0 +1,6 @@
+{
+  "name": "My Daily Tasks",
+  "description": "A clean, beginner-friendly daily to-do list with large text, easy-to-use buttons, and automatic browser storage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
