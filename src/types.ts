@@ -7,3 +7,5 @@ export interface Task {
 }
 
 export type FilterStatus = 'all' | 'unfinished' | 'completed';
+
+export type NoteColor = 'yellow' | 'pink' | 'green' | 'blue' | 'peach';

@@ -22,16 +22,16 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
   onMarkAllComplete,
 }) => {
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
-      {/* Segmented Filter Buttons */}
-      <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl">
+    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1">
+      {/* Blue / Handwriting Filter Tabs */}
+      <div className="flex items-center gap-1.5 p-1 bg-black/5 rounded-xl border border-dashed border-slate-300">
         <button
           type="button"
           onClick={() => onFilterChange('all')}
-          className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-sm sm:text-base font-bold transition cursor-pointer whitespace-nowrap ${
+          className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg font-kalam font-bold text-base sm:text-lg transition cursor-pointer whitespace-nowrap ${
             currentFilter === 'all'
-              ? 'bg-blue-600 text-white shadow-sm'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+              ? 'bg-blue-600 text-white shadow-xs'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-white/50'
           }`}
         >
           All ({totalCount})
@@ -40,10 +40,10 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
         <button
           type="button"
           onClick={() => onFilterChange('unfinished')}
-          className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-sm sm:text-base font-bold transition cursor-pointer whitespace-nowrap ${
+          className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg font-kalam font-bold text-base sm:text-lg transition cursor-pointer whitespace-nowrap ${
             currentFilter === 'unfinished'
-              ? 'bg-blue-600 text-white shadow-sm'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+              ? 'bg-blue-600 text-white shadow-xs'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-white/50'
           }`}
         >
           Unfinished ({unfinishedCount})
@@ -52,10 +52,10 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
         <button
           type="button"
           onClick={() => onFilterChange('completed')}
-          className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-sm sm:text-base font-bold transition cursor-pointer whitespace-nowrap ${
+          className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg font-kalam font-bold text-base sm:text-lg transition cursor-pointer whitespace-nowrap ${
             currentFilter === 'completed'
-              ? 'bg-blue-600 text-white shadow-sm'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+              ? 'bg-blue-600 text-white shadow-xs'
+              : 'text-slate-700 hover:text-slate-900 hover:bg-white/50'
           }`}
         >
           Completed ({completedCount})
@@ -63,16 +63,16 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
       </div>
 
       {/* Quick helper buttons */}
-      <div className="flex items-center gap-2 justify-end">
+      <div className="flex items-center gap-2 justify-end font-kalam font-bold text-sm sm:text-base">
         {unfinishedCount > 0 && (
           <button
             type="button"
             onClick={onMarkAllComplete}
             title="Mark all tasks as completed"
-            className="px-3 py-2 text-sm font-semibold text-blue-700 hover:text-blue-900 hover:bg-blue-50 rounded-lg flex items-center gap-1.5 transition cursor-pointer"
+            className="px-3 py-1.5 text-blue-700 hover:text-blue-900 hover:bg-blue-50/70 border border-transparent hover:border-blue-200 rounded-lg flex items-center gap-1.5 transition cursor-pointer"
           >
             <CheckCheck className="w-4 h-4" />
-            <span className="hidden sm:inline">Mark All Done</span>
+            <span>Mark All Done</span>
           </button>
         )}
 
@@ -81,7 +81,7 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
             type="button"
             onClick={onClearCompleted}
             title="Remove all completed tasks"
-            className="px-3 py-2 text-sm font-semibold text-slate-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg flex items-center gap-1.5 transition cursor-pointer"
+            className="px-3 py-1.5 text-slate-500 hover:text-rose-700 hover:bg-rose-50/70 rounded-lg flex items-center gap-1.5 transition cursor-pointer"
           >
             <Trash2 className="w-4 h-4" />
             <span>Clear Completed</span>

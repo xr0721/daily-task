@@ -1,6 +1,7 @@
-import { Task } from '../types';
+import { Task, NoteColor } from '../types';
 
 const STORAGE_KEY = 'my_daily_tasks_data';
+const COLOR_STORAGE_KEY = 'my_daily_tasks_color';
 
 export const DEFAULT_TASKS: Task[] = [
   {
@@ -31,7 +32,6 @@ export function loadTasksFromStorage(): Task[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
-      // First visit: save initial tasks
       saveTasksToStorage(DEFAULT_TASKS);
       return DEFAULT_TASKS;
     }
@@ -52,5 +52,27 @@ export function saveTasksToStorage(tasks: Task[]): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
   } catch (err) {
     console.error('Failed to save tasks to local storage:', err);
+  }
+}
+
+export function loadColorFromStorage(): NoteColor {
+  if (typeof window === 'undefined') return 'yellow';
+  try {
+    const color = localStorage.getItem(COLOR_STORAGE_KEY) as NoteColor;
+    if (color && ['yellow', 'pink', 'green', 'blue', 'peach'].includes(color)) {
+      return color;
+    }
+  } catch {
+    // fallback
+  }
+  return 'yellow';
+}
+
+export function saveColorToStorage(color: NoteColor): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(COLOR_STORAGE_KEY, color);
+  } catch (err) {
+    console.error('Failed to save note color to storage:', err);
   }
 }

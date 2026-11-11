@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Plus, AlertCircle } from 'lucide-react';
+import { PenTool, Plus, AlertCircle } from 'lucide-react';
 
 interface TaskInputProps {
   onAddTask: (text: string) => void;
@@ -14,7 +14,7 @@ export const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
     e.preventDefault();
     const trimmed = text.trim();
     if (!trimmed) {
-      setError('Please type something before clicking Add Task.');
+      setError('Please write something first before adding!');
       inputRef.current?.focus();
       return;
     }
@@ -33,30 +33,35 @@ export const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1">
+      <div className="flex flex-col sm:flex-row items-stretch gap-3">
+        {/* Handwriting Input Area */}
+        <div className="relative flex-1 group">
+          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none group-focus-within:text-blue-600 transition-colors">
+            <PenTool className="w-5 h-5 stroke-[2]" />
+          </div>
           <input
             ref={inputRef}
             type="text"
             value={text}
             onChange={handleChange}
-            placeholder="Type a new task here... (e.g. Go for a 20-minute walk)"
-            className="w-full h-14 px-5 text-lg sm:text-xl text-slate-800 bg-white border-2 border-slate-300 rounded-xl focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition placeholder:text-slate-400"
-            aria-label="New task description"
+            placeholder="Write a new task here... (e.g., Call the doctor)"
+            className="w-full h-14 pl-11 pr-4 font-handwriting text-2xl sm:text-3xl text-slate-900 bg-white/70 hover:bg-white/90 focus:bg-white border-2 border-dashed border-slate-400/80 focus:border-solid focus:border-blue-600 rounded-xl outline-none transition-all placeholder:text-slate-400 shadow-inner"
+            aria-label="Write a new daily task"
           />
         </div>
 
+        {/* Large Blue Add Task Button */}
         <button
           type="submit"
-          className="h-14 px-7 text-lg sm:text-xl font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-xl flex items-center justify-center gap-2.5 shadow-sm hover:shadow transition cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300"
+          className="h-14 px-6 sm:px-7 font-kalam font-bold text-xl sm:text-2xl text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-[0.98] transition cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300"
         >
-          <Plus className="w-6 h-6 stroke-[2.5]" aria-hidden="true" />
+          <Plus className="w-6 h-6 stroke-[3]" aria-hidden="true" />
           <span>Add Task</span>
         </button>
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 mt-2 text-rose-600 text-sm font-medium">
+        <div className="flex items-center gap-1.5 mt-2 text-rose-700 font-handwriting text-xl">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
